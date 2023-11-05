@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Highlight it",
+    "version": "1.0.0",
+    "description": "Chrome extension to highlight any text and save it to read later",
+    "permissions": [
+        "contextMenus",
+        "storage",
+        "activeTab"
+    ],
+    "author": "develjuanma",
+    "icons": {
+        "128": "icon.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "128": "icon.png"
+        }
+    }
+}

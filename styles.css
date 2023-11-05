@@ -1,0 +1,148 @@
+:root {
+  --color-primary: #FFEE2F;
+  --color-primary-hover: #48B2FF;
+  --color-white: #fff;
+  --color-dark: #202124;
+  --btn-bg: whitesmoke;
+  --btn-bg-hover: rgb(212, 212, 212);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  width: 350px;
+  height: 180px;
+  display: flex;
+  background-color: var(--color-white);
+  color: var(--color-dark);
+  margin: 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+.message {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+button {
+  background: var(--btn-bg);
+  color: var(--color-dark);
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+}
+
+button:hover {
+  background: var(--btn-bg-hover);
+}
+
+.highlight {
+  position: relative;
+  width: calc(100% - 20px);
+  border-radius: 5px;
+  border: 1px solid var(--color-primary);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.highlight:hover {
+  background-color: var(--color-primary);
+}
+
+.highlight p {
+  -webkit-line-clamp: 4;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  margin: 20px 10px;
+  cursor: pointer;
+}
+
+.highlight p:hover {
+  color: var(--color-primary-hover);
+}
+
+.highlight img {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin: 0 10px 0 0;
+}
+
+.source {
+  position: absolute;
+  bottom: -15px;
+  font-size: 8px;
+  color: #777;
+  -webkit-line-clamp: 1 !important;
+  width: inherit;
+}
+
+ul {
+  width: 100%;
+  padding-inline-start: 0;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  height: 200px;
+  overflow: auto;
+  border-bottom: 1px solid var(--btn-bg-hover);
+  padding-bottom: 10px;
+}
+
+.reset-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-all-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  padding: 0 10px;
+  margin: 0 10px 10px 0;
+  border-radius: 5px;
+}
+
+.delete-all-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100%;
+  width: calc(100% - 40px);
+  text-align: center;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
