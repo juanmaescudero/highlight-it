@@ -13,11 +13,6 @@ const highlightsManager = {
             })
         })
     },
-    deleteAllHighlights: () => {
-        chrome.storage.local.set({ highlights: [] }, () => {
-            chrome.runtime.sendMessage({ action: 'highlightsUpdated' })
-        })
-    },
     deleteHighlightById: (id) => {
         chrome.storage.local.get({ highlights: [] }, (data) => {
             const highlights = data.highlights
@@ -91,10 +86,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 })
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === 'deleteAllHighlights') {
-        highlightsManager.deleteAllHighlights()
-        sendResponse({ message: 'All highlights deleted.' })
-    } else if (request.action === 'deleteHighlight') {
+    if (request.action === 'deleteHighlight') {
         highlightsManager.deleteHighlightById(request.id)
         sendResponse({ message: 'Highlight deleted.' })
     } else if (request.action === 'updateHighlightCategory') {

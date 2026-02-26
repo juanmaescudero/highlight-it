@@ -6,7 +6,8 @@
     "permissions": [
         "contextMenus",
         "storage",
-        "activeTab"
+        "activeTab",
+        "tabs"
     ],
     "author": "develjuanma",
     "icons": {

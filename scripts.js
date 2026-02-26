@@ -152,11 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
         updateHighlightLists(e.target.value)
     })
 
-    const deleteButton = document.querySelector('.delete-all-btn')
-    deleteButton.addEventListener('click', () => {
-        chrome.runtime.sendMessage({ action: 'deleteAllHighlights' }, () => {
-            updateHighlightLists()
-        })
+    // Buy Me a Coffee — abrir en nueva pestaña de forma fiable en extensiones
+    document.querySelector('.bmc-btn').addEventListener('click', (e) => {
+        e.preventDefault()
+        chrome.tabs.create({ url: 'https://buymeacoffee.com/develjuanma' })
     })
 
     // ── Categorías ────────────────────────────────────────────────────────────
