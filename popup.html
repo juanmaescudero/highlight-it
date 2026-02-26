@@ -2,31 +2,47 @@
 <html>
 
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1ED953G6PQ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-1ED953G6PQ');
-    </script>
-    
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js"></script>
     <title>Highlight it</title>
     <meta charset="UTF-8" />
   </head>
 
   <body>
     <div class="container">
-      <ul class="highlights-list"></ul>
-      <div class="reset-container">
-        <button class="delete-all-btn">
-          <p>Reset all</p>
-          <img src="/assets/icon-reset.png"/>
-        </button>
+
+      <!-- Header tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="highlights">Highlights</button>
+        <button class="tab-btn" data-tab="categories">Categories</button>
       </div>
+
+      <!-- Tab: Highlights -->
+      <div class="tab-content" id="tab-highlights">
+        <!-- Filter by category -->
+        <div class="filter-bar">
+          <select class="category-filter" id="category-filter">
+            <option value="all">All categories</option>
+          </select>
+        </div>
+        <ul class="highlights-list"></ul>
+        <div class="reset-container">
+          <button class="delete-all-btn">
+            <p>Reset all</p>
+            <img src="/assets/icon-reset.png"/>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab: Categories -->
+      <div class="tab-content hidden" id="tab-categories">
+        <div class="new-category-form">
+          <input type="text" id="new-category-input" placeholder="New category..." maxlength="30" />
+          <button id="add-category-btn">Add</button>
+        </div>
+        <ul class="categories-list" id="categories-list"></ul>
+      </div>
+
     </div>
+    <script src="scripts.js"></script>
   </body>
 </html>

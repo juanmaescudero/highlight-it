@@ -5,6 +5,7 @@
   --color-dark: #202124;
   --btn-bg: whitesmoke;
   --btn-bg-hover: rgb(212, 212, 212);
+  --border-radius: 6px;
 }
 
 ::-webkit-scrollbar {
@@ -12,90 +13,96 @@
 }
 
 body {
-  width: 350px;
-  height: 180px;
+  width: 380px;
+  height: 420px;
   display: flex;
   background-color: var(--color-white);
   color: var(--color-dark);
   margin: 0;
   flex-direction: column;
   align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
 }
 
-.message {
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  padding: 10px 20px;
+/* ── Tabs ────────────────────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  width: 100%;
+  border-bottom: 2px solid var(--btn-bg-hover);
+  margin-bottom: 0;
 }
 
+.tab-btn {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: #777;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab-btn:hover {
+  background: transparent;
+  color: var(--color-dark);
+}
+
+.tab-btn.active {
+  color: var(--color-dark);
+  border-bottom: 2px solid var(--color-dark);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ── Container ───────────────────────────────────────────────────────────── */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100%;
+  height: 100%;
 }
 
-button {
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Filter bar ──────────────────────────────────────────────────────────── */
+.filter-bar {
+  width: calc(100% - 20px);
+  padding: 8px 10px 4px;
+}
+
+.category-filter {
+  width: 100%;
+  padding: 5px 8px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--btn-bg-hover);
   background: var(--btn-bg);
   color: var(--color-dark);
-  padding: 5px 10px;
-  border-radius: 5px;
+  font-size: 12px;
   cursor: pointer;
-  border: 0;
-  outline: 0;
+  outline: none;
 }
 
-button:hover {
-  background: var(--btn-bg-hover);
+.category-filter:focus {
+  border-color: #aaa;
 }
 
-.highlight {
-  position: relative;
-  width: calc(100% - 20px);
-  border-radius: 5px;
-  border: 1px solid var(--color-primary);
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.highlight:hover {
-  background-color: var(--color-primary);
-}
-
-.highlight p {
-  -webkit-line-clamp: 4;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  margin: 20px 10px;
-  cursor: pointer;
-}
-
-.highlight p:hover {
-  color: var(--color-primary-hover);
-}
-
-.highlight img {
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  margin: 0 10px 0 0;
-}
-
-.source {
-  position: absolute;
-  bottom: -15px;
-  font-size: 8px;
-  color: #777;
-  -webkit-line-clamp: 1 !important;
-  width: inherit;
-}
-
+/* ── Highlights list ─────────────────────────────────────────────────────── */
 ul {
   width: 100%;
   padding-inline-start: 0;
@@ -103,13 +110,112 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
-  height: 200px;
+  margin: 8px 0 0;
+  flex: 1;
   overflow: auto;
   border-bottom: 1px solid var(--btn-bg-hover);
   padding-bottom: 10px;
 }
 
+.highlight {
+  position: relative;
+  width: calc(100% - 24px);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--color-primary);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 8px 6px;
+  gap: 2px;
+  cursor: pointer;
+  background-color: #fffde6;
+}
+
+.highlight:hover {
+  background-color: var(--highlight-hover-bg, #fff9c4);
+}
+
+.highlight:hover p,
+.highlight:hover .source {
+  color: var(--color-primary-hover);
+}
+
+/* Badge de categoría */
+.category-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 9px;
+  font-weight: 600;
+  background-color: var(--color-primary);
+  color: var(--color-dark);
+  padding: 1px 7px;
+  border-radius: 20px;
+  white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+/* Fila principal: texto + controles */
+.highlight-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.highlight p {
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  margin: 0;
+  flex: 1;
+  font-size: 12px;
+  transition: color 0.15s;
+}
+
+.highlight > img,
+.highlight-row > img {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.source {
+  font-size: 9px;
+  color: #999;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  margin-top: 2px;
+  transition: color 0.15s;
+}
+
+.source:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Select inline para cambiar categoría */
+.inline-cat-select {
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background: var(--btn-bg);
+  color: var(--color-dark);
+  cursor: pointer;
+  max-width: 80px;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+/* ── Reset button ────────────────────────────────────────────────────────── */
 .reset-container {
   width: 100%;
   display: flex;
@@ -121,24 +227,182 @@ ul {
   align-items: center;
   justify-content: flex-end;
   gap: 5px;
-  padding: 0 10px;
-  margin: 0 10px 10px 0;
-  border-radius: 5px;
+  padding: 4px 10px;
+  margin: 4px 10px 8px 0;
+  border-radius: var(--border-radius);
+  font-size: 12px;
+  background: var(--btn-bg);
+}
+
+.delete-all-btn:hover {
+  background: var(--btn-bg-hover);
 }
 
 .delete-all-btn img {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 }
 
+.delete-all-btn p {
+  margin: 0;
+}
+
+/* ── Info placeholder ────────────────────────────────────────────────────── */
 .info {
   display: flex;
   justify-content: center;
   align-items: center;
-  align-content: center;
   height: 100%;
   width: calc(100% - 40px);
   text-align: center;
+  color: #888;
+  font-size: 12px;
+}
+
+/* ── Tab Categorías ──────────────────────────────────────────────────────── */
+.new-category-form {
+  display: flex;
+  gap: 6px;
+  width: calc(100% - 20px);
+  padding: 10px 10px 6px;
+}
+
+.new-category-form input {
+  flex: 1;
+  padding: 6px 8px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--btn-bg-hover);
+  font-size: 12px;
+  outline: none;
+  color: var(--color-dark);
+}
+
+.new-category-form input:focus {
+  border-color: #aaa;
+}
+
+#add-category-btn {
+  padding: 6px 12px;
+  border-radius: var(--border-radius);
+  background: var(--color-dark);
+  color: var(--color-white);
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+#add-category-btn:hover {
+  background: #444;
+}
+
+.categories-list {
+  height: auto !important;
+  max-height: 300px;
+  border-bottom: none !important;
+  margin-top: 0 !important;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: calc(100% - 24px);
+  padding: 6px 8px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--btn-bg-hover);
+  list-style: none;
+  background: #fafafa;
+  min-height: 34px;
+}
+
+.color-dot-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: block;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ocultar el input nativo de color pero hacerlo clicable */
+.color-dot-btn input[type="color"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.category-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.cat-edit-btn,
+.cat-delete-btn,
+.cat-save-btn,
+.cat-cancel-btn {
+  background: transparent;
+  border: 1px solid var(--btn-bg-hover);
+  cursor: pointer;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--color-dark);
+}
+
+.cat-edit-btn:hover,
+.cat-save-btn:hover {
+  background: #e8f4ff;
+  border-color: var(--color-primary-hover);
+  color: var(--color-primary-hover);
+}
+
+.cat-delete-btn:hover,
+.cat-cancel-btn:hover {
+  background: #fff0f0;
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+.edit-category-input {
+  flex: 1;
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  font-size: 12px;
+  outline: none;
+  color: var(--color-dark);
+}
+
+button {
+  background: var(--btn-bg);
+  color: var(--color-dark);
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+}
+
+button:hover {
+  background: var(--btn-bg-hover);
 }
 
 @keyframes blinker {
