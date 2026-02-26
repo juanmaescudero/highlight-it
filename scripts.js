@@ -152,10 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
         updateHighlightLists(e.target.value)
     })
 
-    // Buy Me a Coffee — abrir en nueva pestaña de forma fiable en extensiones
+    // Buy Me a Coffee — abrir en nueva pestaña
     document.querySelector('.bmc-btn').addEventListener('click', (e) => {
         e.preventDefault()
-        chrome.tabs.create({ url: 'https://buymeacoffee.com/develjuanma' })
+        window.open('https://buymeacoffee.com/develjuanma', '_blank')
     })
 
     // ── Categorías ────────────────────────────────────────────────────────────

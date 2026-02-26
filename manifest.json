@@ -1,14 +1,16 @@
 {
     "manifest_version": 3,
     "name": "Highlight it",
-    "version": "1.1.0",
+    "version": "1.1.2",
     "description": "Chrome extension to highlight any text and save it to read later",
     "permissions": [
         "contextMenus",
         "storage",
-        "activeTab",
-        "tabs"
+        "activeTab"
     ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'none'"
+    },
     "author": "develjuanma",
     "icons": {
         "128": "icon.png"
